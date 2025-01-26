@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Cart = ({ title }) => {
+  useEffect(()=>{
+    console.log('mounted')
+  },[])
   return (
     <div>
       <h1>{title}</h1>
@@ -33,6 +36,7 @@ const App = () => {
         placeholder="Enter a name"
       />
       <button onClick={handleAddName}>Add List</button>
+      <img src="./movies.png" alt="" />
     </>
   );
 };
