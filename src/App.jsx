@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+const Cart = ({ title }) => {
+  return (
+    <div>
+      <h1>{title}</h1>
+    </div>
+  );
+};
+
+const App = () => {
+  const [name, setName] = useState(''); // For input field
+  const [nameList, setNameList] = useState([]); // For the list of names
+
+  const handleAddName = () => {
+    if (name.trim()) {
+      setNameList([...nameList, name]); // Add the current name to the list
+      setName(''); // Clear the input field
+    }
+  };
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {nameList.map((name, index) => (
+          <Cart key={index} title={name} /> // Render each name as a Cart component
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)} // Update name state as user types
+        placeholder="Enter a name"
+      />
+      <button onClick={handleAddName}>Add List</button>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
