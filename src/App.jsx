@@ -16,9 +16,11 @@ const App = () => {
   const [nameList, setNameList] = useState([]); // For the list of names
 
   const handleAddName = () => {
-    if (name.trim()) {
-      setNameList([...nameList, name]); // Add the current name to the list
-      setName(''); // Clear the input field
+    if (name && !nameList.includes(name)) {
+      setNameList([...nameList, name]);
+      setName('');
+    } else {
+      alert('Name already exists or is empty');
     }
   };
 
@@ -42,3 +44,4 @@ const App = () => {
 };
 
 export default App;
+
